@@ -1,4 +1,4 @@
-# msds301-wk7
+# msds301-wk8
 
 ### Setup (windows, gitbash)
 - Clone repo with `git clone git@github.com:jeremycruzz/msds301-wk8.git`
