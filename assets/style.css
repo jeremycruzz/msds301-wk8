@@ -1,0 +1,11 @@
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+#results {
+    display: none;
+    margin-top: 20px;
+}
+.result-section {
+    margin-bottom: 20px;
+}

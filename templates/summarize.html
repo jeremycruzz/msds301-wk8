@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/assets/style.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarizer</title>
+</head>
+<body>
+    <div class="container">
+        <form action="/summarize" method="post">
+            <input type="text" name="topic" placeholder="Enter a topic">
+            <button type="submit">Submit</button>
+        </form>
+
+        {{if .Summary}}
+            <div class="result-section">
+                <h2>Summary</h2>
+                <p>{{.Summary}}</p>
+            </div>
+        {{end}}
+        {{if .Eli5}}
+            <div class="result-section">
+                <h2>ELI5 (Explain Like I'm 5)</h2>
+                <p>{{.Eli5}}</p>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>

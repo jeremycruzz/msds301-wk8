@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jeremycruzz/msds301-wk8/pkg/summarizer"
+	"github.com/jeremycruzz/msds301-wk8/templates"
 )
 
 type SummarizerController struct {
@@ -23,7 +24,36 @@ func NewSummarizerController(service *summarizer.Service) *SummarizerController 
 	return &SummarizerController{SummarizerService: service}
 }
 
-// Get summary gets a summary and eli5 for a given topic
+// Serve template is used with both GET and POST. If its POST it proccesses the data first.
+// Technically PUT/DELETE/GET do the same thing but thats fine.
+func (sc *SummarizerController) ServeTemplate(w http.ResponseWriter, r *http.Request) {
+	response := SummarizeResponse{}
+
+	if r.Method == "POST" {
+		r.ParseForm()
+		topic := r.FormValue("topic")
+
+		summary, eli5, err := sc.SummarizerService.Summarize(topic)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		response.Summary = summary
+		response.Eli5 = eli5
+	}
+
+	if templates.Tmpl != nil {
+		err := templates.Tmpl.ExecuteTemplate(w, "summarize.html", response)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	} else {
+		http.Error(w, "Template is not initialized", http.StatusInternalServerError)
+	}
+}
+
+// get summary gets a summary and eli5 for a given topic
 func (sc *SummarizerController) GetSummary(w http.ResponseWriter, r *http.Request) {
 	topic := strings.ToLower(chi.URLParam(r, "topic"))
 	if topic == "" {
@@ -41,7 +71,7 @@ func (sc *SummarizerController) GetSummary(w http.ResponseWriter, r *http.Reques
 	respondJSON(w, SummarizeResponse{Summary: summary, Eli5: eli5}, http.StatusOK)
 }
 
-// Get summary gets new summary and new eli5 for a given topic that already exists
+// get summary gets new summary and new eli5 for a given topic that already exists
 func (sc *SummarizerController) UpdateSummary(w http.ResponseWriter, r *http.Request) {
 	topic := strings.ToLower(chi.URLParam(r, "topic"))
 	if topic == "" {

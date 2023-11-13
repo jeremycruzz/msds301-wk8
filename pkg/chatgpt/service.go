@@ -11,8 +11,8 @@ import (
 	"github.com/jeremycruzz/msds301-wk8/pkg/types"
 )
 
-const SUMMARY_PROMPT = "Can you summarize this wikipedia article with bullet points? "
-const ELI5_PROMPT = "Can you explain this summary about a wikipedia article as if I were a five year old? "
+const SUMMARY_PROMPT = "Can you summarize this wikipedia article with bullet points?. "
+const ELI5_PROMPT = "Can you explain this summary about a wikipedia article as if I were a five year old?. "
 const API_ENDPOINT = "https://api.openai.com/v1/chat/completions"
 const GPT4_PREVIEW = "gpt-4-1106-preview"
 

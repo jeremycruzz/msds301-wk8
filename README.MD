@@ -22,6 +22,8 @@
     - `POST localhost:8080/summarize/{topic}/update`
         - Updates a an existing topic with a new response from chatgpt
 
+- Notes
+    - Some wikipedia pages might be too long to send to chatgpt so try to stick to shorter wiki pages
 ### Background
 
 TODO
