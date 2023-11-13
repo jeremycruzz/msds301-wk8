@@ -18,10 +18,10 @@ func NewRouter(controller *controller.SummarizerController) *chi.Mux {
 
 	r.Handle("/assets/*", http.StripPrefix("/assets", http.FileServer(http.Dir("assets"))))
 
-	r.Route("/summarize", func(r chi.Router) {
-		r.Get("/", controller.ServeTemplate)
-		r.Post("/", controller.ServeTemplate)
-	})
+	//this feels janky
+	r.Get("/summarize", controller.ServeTemplate)
+	r.Post("/summarize", controller.ServeTemplate)
+
 	return r
 }
 

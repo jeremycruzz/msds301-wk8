@@ -25,7 +25,7 @@ func NewSummarizerController(service *summarizer.Service) *SummarizerController 
 }
 
 // Serve template is used with both GET and POST. If its POST it proccesses the data first.
-// Technically PUT/DELETE/GET do the same thing but thats fine.
+// Technically PUT/DELETE/GET do the same thing but thats fine. I really don't like this.
 func (sc *SummarizerController) ServeTemplate(w http.ResponseWriter, r *http.Request) {
 	response := SummarizeResponse{}
 

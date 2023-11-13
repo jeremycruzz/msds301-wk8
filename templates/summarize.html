@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="container">
+        <img src="/assets/supersummarizer.png" alt="ELI5" />
+        <p>Enter a wikipedia title exaclty in the box.</p>
         <form action="/summarize" method="post">
             <input type="text" name="topic" placeholder="Enter a topic">
             <button type="submit">Submit</button>
@@ -21,7 +23,7 @@
         {{end}}
         {{if .Eli5}}
             <div class="result-section">
-                <h2>ELI5 (Explain Like I'm 5)</h2>
+                <img src="/assets/eli5.png" alt="ELI5" />
                 <p>{{.Eli5}}</p>
             </div>
         {{end}}
