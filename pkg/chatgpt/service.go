@@ -52,7 +52,7 @@ func (s *service) askSummary(prompt string) (string, error) {
 	builder.WriteString(SUMMARY_PROMPT)
 	builder.WriteString(prompt)
 
-	resp, err := s.ask(builder.String())
+	resp, err := s.AskCustom(builder.String())
 	if err != nil {
 		return "", err
 	}
@@ -65,7 +65,7 @@ func (s *service) askEli5(prompt string) (string, error) {
 	builder.WriteString(ELI5_PROMPT)
 	builder.WriteString(prompt)
 
-	resp, err := s.ask(builder.String())
+	resp, err := s.AskCustom(builder.String())
 	if err != nil {
 		return "", err
 	}
@@ -73,7 +73,7 @@ func (s *service) askEli5(prompt string) (string, error) {
 	return resp, nil
 }
 
-func (s *service) ask(prompt string) (string, error) {
+func (s *service) AskCustom(prompt string) (string, error) {
 	// construct request
 	chatReq := types.ChatRequest{
 		Model: s.model,
